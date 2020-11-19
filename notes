@@ -1,0 +1,6 @@
+populate the public page with all issues and comments can add comments and up and down vote
+need allIssues array to push issues into and that can be accessed
+    by the public page without needing authorization. then write get to access
+connect relative comments to issues
+vote up and vote down mechanism
+votes need conditional before increment or decrement. conditional is if the same issue has been voted by that user then dont allow to vote again.
