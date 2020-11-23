@@ -2,9 +2,11 @@ import React, {useState, useContext} from 'react'
 import {IssueCommentContext} from '../context/IssueCommentContext'
 
 const initInputs = {
-   text: ''
-    
+    text: ''
 }
+    
+    
+
 console.log("Comment", IssueCommentContext)
 export default function CommentForm(props){
    
@@ -23,7 +25,7 @@ export default function CommentForm(props){
     function handleSubmit(e){
         e.preventDefault()
         addComment(inputs, props.issueId)
-        //setInputs(initInputs)
+        setInputs(initInputs)
     }
 
     const { text } = inputs

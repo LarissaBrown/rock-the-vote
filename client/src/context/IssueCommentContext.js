@@ -10,7 +10,7 @@ export default function IssueCommentProvider(props) {
 	
     const [issues, setIssues] = 
     useState( [])
-
+    
   
 
 	//const [currentIssue, setCurrentIssue] = useState(null);
@@ -24,11 +24,12 @@ export default function IssueCommentProvider(props) {
         })
     }
     const getComments = (id)=> {
+        console.log(id, "this is the id")
         userAxios.get(`/api/issue/${id}`)
         .then(response => {
-            console.log(response.data)
+            console.log("response data",response.data)
             setIssues(prevIssues => prevIssues.map(issue => issue._id === id? {...issue, comments:response.data} : issue))  
-        })
+        }).catch(err => console.dir(err))
     }
 	const addIssue = (issue, id) => {
 		userAxios.post(`/api/issue/${id}`, {issue}).then(response => {
@@ -83,7 +84,7 @@ export default function IssueCommentProvider(props) {
             updateComment,
             getIssues,
             getComments
-          
+           
              }}>
 			{props.children}
 		</IssueCommentContext.Provider>

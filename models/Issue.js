@@ -17,10 +17,10 @@ const issueSchema = new Schema({
         required: true
     },
     comments: {
-        type: Schema.Types.ObjectId,
-        ref: "Comment",
+        type: Array,
         required: false
     }
+  
     //userswho have upvoted and downvoters array  route returns users who have voted.length ?
 })
 

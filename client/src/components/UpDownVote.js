@@ -10,7 +10,7 @@ const alreadyVoted = []
 
 export default function UpDownVote (props){
     const [voteNum, setVoteNum] = useState(0)
-    const {userId, issueId} = props
+    const { userId, issueId} = props
 
     const increment = (num) => {
         return setVoteNum(num++)
@@ -24,7 +24,9 @@ export default function UpDownVote (props){
         e.preventDefault()
 
     //if alreadyVoted contains the userId and the issueId of the current event then give alert "You have already voted"
-        if(alreadyVoted.contains(userId && issueId)) {
+    console.log("user id", userId)
+    console.log("issue id", issueId)
+        if(alreadyVoted.includes(userId && issueId)) {
             alert ("you have already voted for this issue")
         } else {
     //else 
@@ -38,7 +40,7 @@ export default function UpDownVote (props){
     const handleVoteDown = (e) => {
         e.preventDefault()
     //if alreadyVoted contains the userId and the issueId of the current event then five alert "You have already voted"
-        if(alreadyVoted.contains(userId && issueId)) {
+        if(alreadyVoted.includes(userId && issueId)) {
             alert ("you have already voted for this issue")
         } else {
     //else

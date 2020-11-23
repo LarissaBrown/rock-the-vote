@@ -1,15 +1,16 @@
 import React, { useEffect, useContext } from "react"
 import Comment from "./Comment"
-import {IssueCommentContext} from '../context/IssueCommentContext'
+import { IssueCommentContext } from '../context/IssueCommentContext'
 
 export default function CommentList (props){
-    const { comments, issueId} = props
+  
+    const { issueId } = props
 
-    const {getComments} = useContext(IssueCommentContext)
+    const {getComments, comments} = useContext(IssueCommentContext)
 
     useEffect(()=> {
         getComments(issueId)
-        console.log("working?")
+        //console.log(issueId, "working?")
     }, [getComments, issueId])
 
     
