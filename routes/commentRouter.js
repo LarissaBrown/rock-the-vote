@@ -25,9 +25,9 @@ commentRouter.get("/user", (req, res, next) => {
 })
 
 //Get Comments by Issue Id
-commentRouter.get("/comment", (req, res, next) =>
+commentRouter.get("/:issueId", (req, res, next) =>
 {
-    Comment.find({ issue: req.issue._id }, (err, comments) => {
+    Comment.find({ issue: req.params.issueId }, (err, comments) => {
         if(err){
             res.status(500)
             return next(err)

@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useEffect, useContext, useCallback } from "react"
 import Comment from "./Comment"
 import { IssueCommentContext } from '../context/IssueCommentContext'
 
@@ -9,10 +9,14 @@ export default function CommentList (props){
     const {getComments, comments} = useContext(IssueCommentContext)
 
     useEffect(()=> {
-        getComments(issueId)
+        handleEffect()
+       
         //console.log(issueId, "working?")
-    }, [getComments, issueId])
+    })
 
+    const handleEffect = useCallback(()=> {
+        getComments(issueId)
+    },[getComments, issueId])
     
    
 

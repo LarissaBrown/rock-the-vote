@@ -91,7 +91,8 @@ function addIssue(newIssue){
                 signup,
                 login,
                 logout,
-                addIssue
+                addIssue,
+                getUserIssues
         }}>
             { props.children }
         </UserContext.Provider>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useCallback } from 'react'
 import IssueForm from './IssueForm'
 import IssueList from './IssueList'
 import { Link } from 'react-router-dom'
@@ -6,8 +6,9 @@ import { UserContext } from '../context/UserProvider'
 import  {IssueCommentContext} from '../context/IssueCommentContext'
 
 
-export default function Profile(){
+export default function Profile(props){
 
+   
     const {
         user: {
             username
@@ -21,10 +22,16 @@ export default function Profile(){
         issues
     } = useContext(IssueCommentContext)
 
-    useEffect(()=> {
+    const handleEffect = useCallback(() => {
         getIssues()
     }, [getIssues])
 
+
+    useEffect(()=> {
+        handleEffect()
+       
+    }, [handleEffect])
+    
 
     
     return (

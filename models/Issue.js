@@ -15,10 +15,6 @@ const issueSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
-    },
-    comments: {
-        type: Array,
-        required: false
     }
   
     //userswho have upvoted and downvoters array  route returns users who have voted.length ?

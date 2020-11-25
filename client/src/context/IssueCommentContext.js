@@ -9,7 +9,7 @@ export const IssueCommentContext = React.createContext();
 export default function IssueCommentProvider(props) {
 	
     const [issues, setIssues] = 
-    useState( [])
+    useState([])
     
   
 
@@ -24,12 +24,12 @@ export default function IssueCommentProvider(props) {
         })
     }
     const getComments = (id)=> {
-        console.log(id, "this is the id")
-        userAxios.get(`/api/issue/${id}`)
+        //console.log(id, "this is the id")
+        userAxios.get(`/api/comment/${id}`)
         .then(response => {
-            console.log("response data",response.data)
-            setIssues(prevIssues => prevIssues.map(issue => issue._id === id? {...issue, comments:response.data} : issue))  
-        }).catch(err => console.dir(err))
+            //console.log("response data",response.data)
+            setIssues(prevIssues => prevIssues.map(issue => issue._id === id? {...issue, comments:response.data} : issue)) 
+        }).catch(err => console.error(err))
     }
 	const addIssue = (issue, id) => {
 		userAxios.post(`/api/issue/${id}`, {issue}).then(response => {
