@@ -23,16 +23,16 @@ export default function IssueCommentProvider(props) {
             setIssues(response.data)
         })
     }
-    const getComments = (id)=> {
-        //console.log(id, "this is the id")
-        userAxios.get(`/api/comment/${id}`)
-        .then(response => {
-            //console.log("response data",response.data)
-            setIssues(prevIssues => prevIssues.map(issue => issue._id === id? {...issue, comments:response.data} : issue)) 
-        }).catch(err => console.error(err))
-    }
-	const addIssue = (issue, id) => {
-		userAxios.post(`/api/issue/${id}`, {issue}).then(response => {
+    // const getComments = (id)=> {
+    //     //console.log(id, "this is the id")
+    //     userAxios.get(`/api/comment/${id}`)
+    //     .then(response => {
+    //         //console.log("response data",response.data)
+    //         setIssues(prevIssues => prevIssues.map(issue => issue._id === id? {...issue, comments:response.data} : issue)) 
+    //     }).catch(err => console.error(err))
+    // }
+	const addIssue = (issue) => {
+		userAxios.post(`/api/issue`, {issue}).then(response => {
 			setIssues(prevIssues => [...prevIssues, response.data]);
 		}).catch(err => console.dir(err));
     };
@@ -40,7 +40,7 @@ export default function IssueCommentProvider(props) {
     const addComment = (comment, id)=> {
         console.log("comment",comment)
         userAxios.post(`/api/comment/${id}`, comment).then(response => {
-         //   setComments(prevComments => [...prevComments, response.data]); 
+        //setComments(prevComments => [...prevComments, response.data]); 
          setIssues(prevIssues => prevIssues.map(issue => issue._id === id? {...issue, comments: [...issue.comments, response.data]} : issue))    
         }).catch(err => console.dir(err));
     }
@@ -56,14 +56,14 @@ export default function IssueCommentProvider(props) {
 		}).catch(err => console.dir(err));
 	};
     
-    const updateComment = (id, data) => {
-		userAxios.put(`/api/comment/${id}`, data).then(response => {
-			//const index = comments.findIndex(comment => comment._id === id);
-			//const updated = [...comments];
-			//updated[index].comment = response.data;
-			//setComments(updated);
-		}).catch(err => console.dir(err));
-	};
+    // const updateComment = (id, data) => {
+	// 	userAxios.put(`/api/comment/${id}`, data).then(response => {
+	// 		//const index = comments.findIndex(comment => comment._id === id);
+	// 		//const updated = [...comments];
+	// 		//updated[index].comment = response.data;
+	// 		//setComments(updated);
+	// 	}).catch(err => console.dir(err));
+	//};
 	const deleteIssue = id => {
 		userAxios.delete(`/api/issue/${id}`).then(response => {
 			setIssues(prevIssues => prevIssues.filter(issue => issue._id !== id));
@@ -81,9 +81,9 @@ export default function IssueCommentProvider(props) {
             updateIssue,
             deleteIssue,
             addComment,
-            updateComment,
+            //updateComment,
             getIssues,
-            getComments
+            //getComments
            
              }}>
 			{props.children}

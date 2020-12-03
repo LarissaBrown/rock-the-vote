@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from 'react'
+import React, { useContext, useEffect} from 'react'
 import IssueForm from './IssueForm'
 import IssueList from './IssueList'
 import { Link } from 'react-router-dom'
@@ -14,23 +14,29 @@ export default function Profile(props){
             username
         },
         logout,
+        getUserIssues
     } = useContext(UserContext)
 
     const {
-        getIssues,
+        //getIssues,
         addIssue,
         issues
     } = useContext(IssueCommentContext)
 
-    const handleEffect = useCallback(() => {
-        getIssues()
-    }, [getIssues])
+    // const handleEffect = useCallback(() => {
+    //     getIssues()
+    // }, [getIssues])
 
 
     useEffect(()=> {
-        handleEffect()
+        //handleEffect()
+        
+        getUserIssues()
+    
+
+        
        
-    }, [handleEffect])
+    }, [getUserIssues, issues.length])
     
 
     
@@ -41,7 +47,7 @@ export default function Profile(props){
             <h3>Bring Up An Issue</h3>
             <IssueForm addIssue={addIssue}/>
             <h3>Your Issues</h3>
-            <IssueList issues={ issues } getIssues={getIssues}/>
+            <IssueList issues={ issues } getIssues={getUserIssues}/>
         </div>
     )
 }

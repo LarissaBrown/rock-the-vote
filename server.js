@@ -10,7 +10,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 
-mongoose.connect('mongodb://localhost:27017/user-authentication',
+mongoose.connect('mongodb://localhost:27017/RTV',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/user-authentication',
 app.use('/auth', require('./routes/authRouter.js'))
 app.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))//req.user
 app.use('/api/issue', require('./routes/issueRouter.js'))
-app.use('/api/comment', require('./routes/commentRouter.js'))
+//app.use('/api/comment', require('./routes/commentRouter.js'))
 
 app.use((err, req, res, next) => {
     console.log(err)

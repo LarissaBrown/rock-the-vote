@@ -11,11 +11,23 @@ const issueSchema = new Schema({
         type: String,
         required: true
     },
+    comments: [{
+        text: String,
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        },
+    }],
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
-        required: true
-    }
+    },
+    alreadyVoted: [{
+        user: {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    }]
   
     //userswho have upvoted and downvoters array  route returns users who have voted.length ?
 })
