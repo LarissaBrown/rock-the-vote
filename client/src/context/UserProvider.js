@@ -14,12 +14,14 @@ userAxios.interceptors.request.use(config => {
 export default function UserProvider(props) {
     const initState = {
         user: JSON.parse(localStorage.getItem('user')) || {},
-        token: localStorage.getItem('token') || "",
-        issues: [],
-        
+        token: localStorage.getItem('token') || "",  
     }
-    const [userState, setUserState] = useState(initState)
 
+  
+
+    const [userState, setUserState] = useState(initState)
+    //const [currentUser, setCurrentUser] = useState()
+    
 function signup(credentials){
     axios.post('/auth/signup', credentials)
     .then(res => {
@@ -32,8 +34,9 @@ function signup(credentials){
             user, 
             token
         }))
+        
     })
-    .catch(err => console.log(err.response.data.errMsg))
+    .catch(err => console.dir(err.response.data.errMsg))
 }
 function login(credentials){
     axios.post('/auth/login', credentials)
@@ -41,12 +44,12 @@ function login(credentials){
         const {user, token} = res.data
         localStorage.setItem('token', token)
         localStorage.setItem('user', JSON.stringify(user))
-        getUserIssues()
         setUserState(prevUserState => ({
             ...prevUserState, 
             user, 
             token
         }))
+        
     })
     .catch(err => console.dir(err.response.data.errMsg))
 }
@@ -59,29 +62,10 @@ function logout(){
         token: "",
         issues: []
     })
+    //setCurrentUser({})
 }
 
-function getUserIssues(){
-    userAxios.get('/api/issue/user')
-    .then(res => {
-        setUserState(prevState => ({ 
-            ...prevState, 
-            issues: res.data 
-        }))
-    })
-    .catch(err => console.log(err.response.data.errMsg))
-}
 
-function addIssue(newIssue){
-    userAxios.post('/api/issue', newIssue)
-    .then(res => {
-        setUserState(prevState => ({
-            ...prevState,
-            issues: [...prevState.issues, res.data]
-        }))
-    })
-    .catch(err => console.log(err.response.data.errMsg))
-}
 
 
     return (
@@ -91,8 +75,8 @@ function addIssue(newIssue){
                 signup,
                 login,
                 logout,
-                addIssue,
-                getUserIssues
+                //currentUser
+              
         }}>
             { props.children }
         </UserContext.Provider>

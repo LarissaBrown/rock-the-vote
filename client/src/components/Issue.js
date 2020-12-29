@@ -2,22 +2,26 @@ import React, {useContext} from 'react'
 import CommentForm from './CommentForm'
 import UpDownVote from './UpDownVote'
 import CommentList from './CommentList'
-import { UserContext } from '../context/UserProvider.js'
+import { IssueCommentContext } from '../context/IssueCommentContext'
 
 
 
 export default function Issue(props){
-    const {token } = useContext(UserContext)
-    const { title, description, _id, addComment, comments } = props
-    //console.log("comments", comments)
-    //console.log("token", token)
-    return(
+   
+    const { getIssues } = useContext(IssueCommentContext)
+    const { title, description, _id, comments, user} = props
+    
+    return( 
         <div className="issue">
             <h1 className="issue-title">{title}</h1>
-            <UpDownVote issueId={_id} userId={token}/>
+            <p className="username">posted by: {user.username}</p>
+            <UpDownVote issueId={_id}
+            />
             <h3 className="issue-description">{description}</h3>
-            <CommentForm issueId={_id} addComment={addComment}/>
-            <CommentList comments={comments} issueId={_id}/>
+            
+            <CommentForm issueId={_id}  getIssues={getIssues}
+            />
+            <CommentList comments={comments}/>
 
         </div>
     )

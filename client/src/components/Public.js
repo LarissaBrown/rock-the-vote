@@ -1,25 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import IssueList from './IssueList'
-import { UserContext } from '../context/UserProvider'
 import { IssueCommentContext } from '../context/IssueCommentContext'
 
 
 
-export default function Public(){
+export default function Public(props){
+
+   
 
     const {
+        getIssues,
+        addComment,
+        getComments,
         issues,
-        addComment
-    } = useContext(UserContext)
-
-    const {
-        getIssues
+        username
     } = useContext(IssueCommentContext)
-    
+   
+
+
+    useEffect(()=> {
+        //handleEffect()
+        
+        getIssues([])
+       
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
         <div className="public">
             <h3>Current Issues</h3>
-            <IssueList issues={ issues } getIssues={getIssues} addComment={addComment}/>
+            <IssueList issues={ issues } username={username} getComments={getComments} getIssues={getIssues} addComment={addComment}/>
         </div>
     )
 }

@@ -14,13 +14,15 @@ export default function Profile(props){
             username
         },
         logout,
-        getUserIssues
     } = useContext(UserContext)
 
     const {
         //getIssues,
         addIssue,
-        issues
+        addComment,
+        getComments,
+        issues,
+        getUserIssues
     } = useContext(IssueCommentContext)
 
     // const handleEffect = useCallback(() => {
@@ -31,12 +33,10 @@ export default function Profile(props){
     useEffect(()=> {
         //handleEffect()
         
-        getUserIssues()
-    
-
-        
+        getUserIssues([])
        
-    }, [getUserIssues, issues.length])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [ ])
     
 
     
@@ -47,7 +47,7 @@ export default function Profile(props){
             <h3>Bring Up An Issue</h3>
             <IssueForm addIssue={addIssue}/>
             <h3>Your Issues</h3>
-            <IssueList issues={ issues } getIssues={getUserIssues}/>
+            <IssueList issues={ issues } username={username} addComment={addComment} getComments={getComments} getIssues={getUserIssues}/>
         </div>
     )
 }

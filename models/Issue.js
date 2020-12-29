@@ -11,25 +11,22 @@ const issueSchema = new Schema({
         type: String,
         required: true
     },
-    comments: [{
-        text: String,
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        },
-    }],
+    comments: [{body: String, by: {type:Schema.Types.ObjectId, ref: 'User'}}],
+
     user: {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
+        
     },
-    alreadyVoted: [{
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        }
-    }]
-  
-    //userswho have upvoted and downvoters array  route returns users who have voted.length ?
+
+    voteNum: {
+        type: Number,
+        required: false, 
+        default: 0
+
+    }
+    
+ 
 })
 
 module.exports = mongoose.model("Issue", issueSchema)
