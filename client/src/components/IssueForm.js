@@ -1,10 +1,19 @@
 import React, {useState} from 'react'
 import { useLocation } from 'react-router-dom'
 
+
+
 const initInputs = {
-    title: '',
+    //title: '',
     description: '',
-    username: '',
+    user: {
+        username: ''
+    },
+    comments:{
+        by: {
+            username: ''
+        }
+    }
 
     
    
@@ -14,7 +23,7 @@ const initInputs = {
 export default function IssueForm(props){
 
     const [inputs, setInputs] = useState(initInputs)
-    const {addIssue, getIssuesUsername, getUserIssues} = props
+    const {addIssue, getIssues, getUserIssues, issues} = props
     function handleChange(e){
         const {name, value} = e.target
         setInputs(prevInputs => ({
@@ -23,15 +32,17 @@ export default function IssueForm(props){
         }))
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e, id){
         e.preventDefault()
+        id = user.id
         addIssue(inputs)
         setInputs(initInputs)
         if(useLocation.pathname === "/public") {
-            getIssuesUsername()
+            getIssues()
+            console.log("issues", issues)
             console.log("public issues")
         }else if(useLocation.pathname === "/profile"){
-            getUserIssues()
+            getUserIssues(id)
             console.log("private issues")
         }
         

@@ -3,20 +3,16 @@ import {IssueCommentContext} from '../context/IssueCommentContext'
 import { useLocation } from 'react-router-dom'
 
 const initInputs = {
-   
-  body: '',
-  by:{}
-}
+    body: ''
+  }
     
-    
-
-console.log("Comment", IssueCommentContext)
 export default function CommentForm(props){
    
     const { addComment, getIssues, getUserIssues } = useContext(IssueCommentContext)
-   
+    
    
     const [inputs, setInputs] = useState(initInputs)
+
     function handleChange(e){
         const {name, value} = e.target
         setInputs(prevInputs => ({

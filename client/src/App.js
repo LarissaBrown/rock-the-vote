@@ -5,14 +5,19 @@ import Auth from './components/Auth.js';
 import Profile from './components/Profile.js';
 import Public from './components/Public.js';
 import { UserContext } from './context/UserProvider.js'
+//import { IssueCommentContext } from './context/IssueCommentContext.js'
 
 import './css/styles.css';
 
 
 
-function App() {
- 
-  const { token } = useContext(UserContext)
+function App(props) {
+  //const { username } = useContext(IssueCommentContext)
+  const { voteNum, username } = props 
+
+  
+  const { token, user } = useContext(UserContext)
+  console.log("App.js", user)
   return (
     <div className="App">
       <Navbar  />
@@ -23,11 +28,11 @@ function App() {
         />
         <Route
         path ="/profile"
-        render={() => token ? <Profile /> : <Auth />}
+        render={() => token ? <Profile user={user} username={username} voteNum={voteNum}/> : <Auth />}
         />
         <Route 
         path="/public"
-        render={()=> <Public />}
+        render={()=> <Public  user={user} username={username} voteNum={voteNum}/>}
         />
       </Switch>
     </div>

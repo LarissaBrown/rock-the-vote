@@ -6,13 +6,15 @@ import { UserContext } from '../context/UserProvider'
 import  {IssueCommentContext} from '../context/IssueCommentContext'
 
 
-export default function Profile(props){
 
+export default function Profile(props){
+    const { voteNum, _id} = props
    
     const {
         user: {
             username
         },
+        
         logout,
     } = useContext(UserContext)
 
@@ -47,7 +49,13 @@ export default function Profile(props){
             <h3>Bring Up An Issue</h3>
             <IssueForm addIssue={addIssue}/>
             <h3>Your Issues</h3>
-            <IssueList issues={ issues } username={username} addComment={addComment} getComments={getComments} getIssues={getUserIssues}/>
+            <IssueList issues={ issues } 
+            issueId={_id} 
+            voteNum={voteNum} 
+            addComment={addComment} 
+            getComments={getComments} 
+            getIssues={getUserIssues} 
+           />
         </div>
     )
 }

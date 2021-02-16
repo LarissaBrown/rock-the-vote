@@ -8,10 +8,12 @@ const userSchema = new Schema({
         required: true,
         lowercase: true,
         unique: true
+        
     },
     password: {
         type: String,
         required: true
+        
     },
     memberSince: {
         type: Date,
@@ -20,13 +22,8 @@ const userSchema = new Schema({
     isAdmin: {
         type: Boolean, 
         default: false
-    },
-    upVotedIssues: {
-        type: Array,
-    },
-    downVotedIssues: {
-        type: Array,
     }
+   
 })
 //pre-save hook to encrypt user passwords on signup
 userSchema.pre("save", function(next){

@@ -21,6 +21,8 @@ mongoose.connect('mongodb://localhost:27017/RTV',
 
 app.use('/auth', require('./routes/authRouter.js'))
 app.use('/api', expressJwt({ secret: process.env.SECRET, algorithms: ['HS256']}))//req.user
+
+// May want to change this to app.get instead of app.use so unauthenticated users can't do anything but see existing data
 app.use('/issue', require('./routes/issueRouter.js'))
 app.use('/api/issue', require('./routes/issueRouter.js'))
 
